@@ -21,18 +21,18 @@ F53B_combined <- function(t, state, parameters) {
     
     # Blood compartment
     dCb <- (Qli* blood_f * (Ali / Pliu / Wli - Cb ) - 
-              Qki * blood_f *(Cb  - Aki / Pkiu / Wki) -
+              Qki * blood_f*(Cb  - Aki / Pkiu / Wki) -
               Qsp * blood_f* (Cb  - Asp / Pspu / Wsp) -
               Qte * blood_f* (Cb  - Ate / Pteu / Wte) -
-              Qbr * blood_f * (Cb  - Abr / Pbru / Wbr) -
-              Qfa  * blood_f* (Cb - Afa / Pfau / Wfa) -
-              Qhe * blood_f * (Cb  - Ahe / Pheu / Whe) -
+              Qbr * blood_f* (Cb  - Abr / Pbru / Wbr) -
+              Qfa * blood_f* (Cb - Afa / Pfau / Wfa) -
+              Qhe * blood_f* (Cb  - Ahe / Pheu / Whe) -
               Qlu * blood_f* (Cb  - Alu / Pluu / Wlu) -
               Qre * blood_f* (Cb - Are / Preu / Wre)) / Wb
     
     # Gut compartment (for oral administration)
-    absorbed <- Ka * Agut * Fabs
-    excreted <- Ka * Agut * (1 - Fabs)
+    absorbed <- Kabs * Agut
+    excreted <- Kelm * Agut
     dAgut <- - (absorbed + excreted)
     
     # Liver compartment (with metabolism)
@@ -70,8 +70,8 @@ params<-c(BW = 0.03, GFR = 0.556, Wli = 0.001647, Wki = 0.000501, Wb = 0.0024,
                        Qki = 0.10829, Qsp = 0.004165, Qte = 0.0071162, Qbr = 0.03927, 
                        Qfa = 0.0833, Qhe = 0.07854, Qlu = 0.00595, Qre = 0.6717788, 
                        Pliu = 13.14, Pkiu = 0.46, Pspu = 0.3, Pteu = 0.24, Pbru = 0.12, 
-                       Pluu = 0.82, Pfau = 0.12, Pheu = 0.29, Fabs = 0.64, blood_f = 0.067, 
-          Km = 2.4e-05, K_reab = 0.87, Ka = 1.46, 
+                       Pluu = 0.82, Pfau = 0.12, Pheu = 0.29, Kelm= 1.46*(1-0.65), blood_f = 0.067, 
+          Km = 2.4e-05, K_reab = 0.87, Kabs = 1.46*0.65, 
           filter_fraction = 0.051, Preu = 0.32, 
           Km_reab = 7031
 )
