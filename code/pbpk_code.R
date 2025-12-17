@@ -73,7 +73,7 @@ params<-c(BW = 0.03, GFR = 0.01668, Wli = 0.001647, Wki = 0.000501, Wb = 0.0024,
                        Qfa = 0.0833, Qhe = 0.07854, Qlu = 0.00595, Qre = 0.6717788, 
                        Pliu = 13.14, Pkiu = 0.46, Pspu = 0.3, Pteu = 0.24, Pbru = 0.12, 
                        Pluu = 0.82, Pfau = 0.12, Pheu = 0.29, Kelm= 0.525, blood_f = 0.067, 
-          Km = 5.35e-05, K_reab = 0.77, Kabs = 0.975, 
+          Kbil = 5.35e-05, Kmax = 0.77, Kabs = 0.975, 
           FF = 0.5293, Preu = 0.53, kur=0.017,
           Km_reab = 4873
 )
@@ -105,4 +105,5 @@ if (route == 'IV') {
   sim <- ode(y = state, times = sim_time, func = F53B_combined, parms = params,
              events = list(
                func = force_positive,
-               time = sim_time)
+               time = sim_time))
+}
